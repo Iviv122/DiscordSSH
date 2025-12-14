@@ -1,5 +1,5 @@
 // idfk why
-import { TOKEN, BOT_ID, GUILD_ID, CHANNEL_ID } from "@/config";
+import { TOKEN } from "@/config";
 import { ActivityType, Client, IntentsBitField } from "discord.js";
 
 try {
@@ -20,10 +20,26 @@ try {
     console.log(`The bot ${c.user.tag} is ready to serve you!`);
   });
 
-  client.on("messageCreate", (message) => {
-    console.log("Got new message:", message.content);
-    if (message.content === "run") {
-      message.reply("HEY");
+  client.on("interactionCreate", async (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+
+    const commandName = interaction.commandName;
+    console.log(`searching for ${commandName} command`);
+
+    if (commandName === "hey") {
+      await interaction.reply("HEY");
+    }
+
+    if (commandName === "test") {
+      await interaction.reply("test");
+    }
+
+    if (commandName === "ping") {
+      await interaction.reply("pong");
+    }
+
+    if (commandName === "run") {
+      await interaction.reply("running");
     }
   });
 
