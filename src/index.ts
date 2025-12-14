@@ -1,11 +1,6 @@
 // idfk why
-import "dotenv/config";
-import { defaultConfig } from "@/config";
+import { TOKEN, BOT_ID, GUILD_ID, CHANNEL_ID } from "@/config";
 import { ActivityType, Client, IntentsBitField } from "discord.js";
-
-if (!!!defaultConfig.token) {
-  throw "No token set";
-}
 
 try {
   const client = new Client({
@@ -33,7 +28,7 @@ try {
   });
 
   console.log("Logging in");
-  client.login(defaultConfig.token);
+  client.login(TOKEN);
   console.log("Succesfull login");
 
   client.user?.setActivity("Serving SSH", { type: ActivityType.Custom });
